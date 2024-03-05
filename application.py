@@ -11,4 +11,4 @@ def init_interface():
     <input type="text" id'="fName" name="fName"/>
     <label for="lName">Last Name</label>
     <input type="text" id'="lName" name="lName"/>
-    <button type="button">Query</button>''
+    <button type="button">Query</button>'''
