@@ -12,7 +12,7 @@ app = Flask(__name__)
 def init_interface():
     if request.method == "POST":
         if request.form["button"] == "Load Data":
-            return f'''<h1>data loaded {client}</h1?'''
+            return '''<h1>data loaded</h1?'''
         elif request.form["button"] == "Clear Data":
             return '''<h1>data cleared</h1>'''
         elif request.form["button"] == "Query":
