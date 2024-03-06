@@ -1,10 +1,10 @@
 from flask import Flask, request, redirect, url_for
-import json
-import os
-import sys
+#import json
+#import os
+#import sys
 
-from azure.core.exceptions import AzureError
-from azure.cosmos import CosmosClient, PartitionKey
+#from azure.core.exceptions import AzureError
+#from azure.cosmos import CosmosClient, PartitionKey
 
 app = Flask(__name__)
 
@@ -12,8 +12,6 @@ app = Flask(__name__)
 def init_interface():
     if request.method == "POST":
         if request.form["button"] == "Load Data":
-            CONN_STR = os.environ["mongodb://li-c-436p4-server:0Thk4cHi5Y0rLkelh4VB0Coxz2hpZY2fot03kUDh12rj6fW8oXMleZhwplJmQRJKQDzIb5F7LEndACDb8hGngw==@li-c-436p4-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@li-c-436p4-server@"]
-            client = CosmosClient.from_connection_string(conn_str=CONN_STR)
             return f'''<h1>data loaded {client}</h1?'''
         elif request.form["button"] == "Clear Data":
             return '''<h1>data cleared</h1>'''
