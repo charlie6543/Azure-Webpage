@@ -1,14 +1,48 @@
-from flask import Flask
+from flask import Flask, request, redirect, url_for
+import json
+import os
+import sys
+
+from azure.core.exceptions import AzureError
+from azure.cosmos import CosmosClient, PartitionKey
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def init_interface():
-    return '''<h1>this is a website<h1>
-    <button type="button">Load Data</button><br>
-    <button type="button">Clear Data</button><br>
-    <label for="fName">First Name</label>
-    <input type="text" id'="fName" name="fName"/>
-    <label for="lName">Last Name</label>
-    <input type="text" id'="lName" name="lName"/>
-    <button type="button">Query</button>'''
+    if request.method == "POST":
+        if request.form["button"] == "Load Data":
+            CONN_STR = os.environ["mongodb://li-c-436p4-server:0Thk4cHi5Y0rLkelh4VB0Coxz2hpZY2fot03kUDh12rj6fW8oXMleZhwplJmQRJKQDzIb5F7LEndACDb8hGngw==@li-c-436p4-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@li-c-436p4-server@"]
+            client = CosmosClient.from_connection_string(conn_str=CONN_STR)
+            return f'''<h1>data loaded {client}</h1?'''
+        elif request.form["button"] == "Clear Data":
+            return '''<h1>data cleared</h1>'''
+        elif request.form["button"] == "Query":
+            input1 = request.form["fName"]
+            input = request.form["lName"]
+            return f'''<h1>input: {input1} + {input}</h1>'''
+    else:
+        # when 'load' is hit, add data to database:
+        # from this url:
+        # https://css490.blob.core.windows.net/lab4/input.txt
+        # copy data into oject storage in cloud
+        # parse and load into database
+
+        # when 'clear' is hit, remove data from everywhere
+
+        # when query:
+        # if nothing in database, return error
+        # return matches from database
+        return '''<form action="#" method="post">
+        <h1>this is a website<h1>
+        <input type="submit" name="button" value="Load Data"><br>
+        <input type="submit" name="button" value="Clear Data"><br>
+        <label for="fName">First Name</label>
+        <input type="text" id'="fName" name="fName"/>
+        <label for="lName">Last Name</label>
+        <input type="text" id'="lName" name="lName"/>
+        <input type="submit" name="button" value="Query"/>'''
+
+@app.route("/input")
+def input(input):
+    return '''<h1>input: {input}</h1>'''
