@@ -1,0 +1,4 @@
+# requirements.txt
+flask
+azure.cosmos
+azure-storage-blob azure-identity
