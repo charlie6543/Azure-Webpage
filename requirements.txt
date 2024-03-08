@@ -1,4 +1,0 @@
-# requirements.txt
-flask
-mongodb
-azure-storage-blob azure-identity
