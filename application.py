@@ -3,11 +3,8 @@ import json
 import os
 import sys
 import uuid
-import http.client
 
 from azure.core.exceptions import AzureError
-#from azure.cosmos import CosmosClient, PartitionKey
-from azure.identity import DefaultAzureCredential
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 from pymongo.mongo_client import MongoClient
 
