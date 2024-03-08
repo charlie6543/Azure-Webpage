@@ -1,4 +1,4 @@
 # requirements.txt
 flask
-azure.cosmos
+mongodb
 azure-storage-blob azure-identity
