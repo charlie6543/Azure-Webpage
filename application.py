@@ -70,12 +70,10 @@ def load():
     blob = get_blob.download_blob()
     blob_text = blob.readall()
 
-    # making copy in azure blob storage
-    container_client.upload_blob("input.txt", blob_text, "BlockBlob", overwrite=True)
-
     # parsing data
     text = str(blob_text)
     text = text[2:len(text) - 1]
+    container_client.upload_blob("input.txt", text, "BlockBlob", overwrite=True)
     text = text.replace("\\t", " ")
     people = text.split("\\r\\n")
 
