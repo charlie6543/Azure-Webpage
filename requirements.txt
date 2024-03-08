@@ -1,0 +1,4 @@
+Flask
+azure.core
+azure.storage.blob
+pymongo
