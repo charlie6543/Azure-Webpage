@@ -73,8 +73,8 @@ def load():
     # parsing data
     text = str(blob_text)
     text = text[2:len(text) - 1]
-    container_client.upload_blob("input.txt", text, "BlockBlob", overwrite=True)
-    container_client.get_blob_client("input.txt").set_http_headers({"content_type": "text/plain"})
+    contentSettings = ContentSettings(content_type='text/plain')
+    container_client.upload_blob("input.txt", text, "BlockBlob", overwrite=True, content_settings=contentSettings)
     text = text.replace("\\t", " ")
     people = text.split("\\r\\n")
 
