@@ -5,32 +5,23 @@ import sys
 import uuid
 
 from azure.core.exceptions import AzureError
-from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, ContentSettings
 from pymongo.mongo_client import MongoClient
 
 app = Flask(__name__)
 
-client = MongoClient("mongodb://li-c-436p4-server:0Thk4cHi5Y0rLkelh4VB0Coxz2hpZY2fot03kUDh12rj6fW8oXMleZhwplJmQRJKQDzIb5F7LEndACDb8hGngw==@li-c-436p4-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@li-c-436p4-server@")
-database = client["436p4DB"]
-dbCollect = database["storedData"]
-
-# Create the BlobServiceClient object
-blobContainerName = "436p4"
-blob_service_client = BlobServiceClient.from_connection_string("DefaultEndpointsProtocol=https;AccountName=cs41003200113807a1f;AccountKey=2Nljt9xH0Ry2YrCbWppi5C/lhx7CWxu6NIzeyQ9mAuLHyzIPG7aiGGrwKmm8GOe5lx0FsMV5MANj+AStdXc2xw==;EndpointSuffix=core.windows.net")
-container_client = blob_service_client.get_container_client("436p4")
-
 @app.route("/", methods=["POST", "GET"])
 def init_interface():
     if request.method == "POST":
-        # when prompted to load data
-        if request.form["button"] == "Load Data":
+        if request.form["button"] == "Load Data": # load data button
             return redirect(url_for("load"))
-        elif request.form["button"] == "Clear Data":
+        elif request.form["button"] == "Clear Data": # clear data button
             return redirect(url_for("clear"))
-        elif request.form["button"] == "Query":
+        elif request.form["button"] == "Query": #query
             fInput = request.form["fName"]
             lInput = request.form["lName"]
 
+            # finding out how many params were given and calling corresponding url
             if(fInput == "" and lInput == ""):
                 return redirect(url_for("queryAll"))
             if(fInput == ""):
@@ -40,9 +31,7 @@ def init_interface():
             # searching database
             return redirect(url_for("query", fName = fInput, lName = lInput))
     else:
-        # when query:
-        # if nothing in database, return error
-        # return matches from database
+        # simple form with user input options
         return '''<form action="#" method="post">
         <h1>this is a website<h1>
         <input type="submit" name="button" value="Load Data"><br>
@@ -70,11 +59,13 @@ def load():
     blob = get_blob.download_blob()
     blob_text = blob.readall()
 
+    # making copy
+    contentSettings = ContentSettings(content_type='text/plain')
+    container_client.upload_blob("input.txt", blob_text, "BlockBlob", overwrite=True, content_settings=contentSettings)
+
     # parsing data
     text = str(blob_text)
     text = text[2:len(text) - 1]
-    contentSettings = ContentSettings(content_type='text/plain')
-    container_client.upload_blob("input.txt", text, "BlockBlob", overwrite=True, content_settings=contentSettings)
     text = text.replace("\\t", " ")
     people = text.split("\\r\\n")
 
