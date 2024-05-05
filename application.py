@@ -10,6 +10,8 @@ from pymongo.mongo_client import MongoClient
 
 app = Flask(__name__)
 
+// credentials have been redacted
+
 @app.route("/", methods=["POST", "GET"])
 def init_interface():
     if request.method == "POST":
@@ -45,13 +47,13 @@ def init_interface():
 @app.route("/load")
 def load():
     # connect to db
-    client = MongoClient("mongodb://li-c-436p4-server:0Thk4cHi5Y0rLkelh4VB0Coxz2hpZY2fot03kUDh12rj6fW8oXMleZhwplJmQRJKQDzIb5F7LEndACDb8hGngw==@li-c-436p4-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@li-c-436p4-server@")
+    //client = MongoClient()
     database = client["436p4DB"]
     dbCollect = database["storedData"]
     
     # Create the BlobServiceClient object
     blobContainerName = "436p4"
-    blob_service_client = BlobServiceClient.from_connection_string("DefaultEndpointsProtocol=https;AccountName=cs41003200113807a1f;AccountKey=2Nljt9xH0Ry2YrCbWppi5C/lhx7CWxu6NIzeyQ9mAuLHyzIPG7aiGGrwKmm8GOe5lx0FsMV5MANj+AStdXc2xw==;EndpointSuffix=core.windows.net")
+    //blob_service_client = BlobServiceClient.from_connection_string()
     container_client = blob_service_client.get_container_client("436p4")
 
     # getting data
@@ -97,13 +99,13 @@ def load():
 @app.route("/clear")
 def clear():
     # connect to db
-    client = MongoClient("mongodb://li-c-436p4-server:0Thk4cHi5Y0rLkelh4VB0Coxz2hpZY2fot03kUDh12rj6fW8oXMleZhwplJmQRJKQDzIb5F7LEndACDb8hGngw==@li-c-436p4-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@li-c-436p4-server@")
+    //client = MongoClient()
     database = client["436p4DB"]
     dbCollect = database["storedData"]
     
     # Create the BlobServiceClient object
     blobContainerName = "436p4"
-    blob_service_client = BlobServiceClient.from_connection_string("DefaultEndpointsProtocol=https;AccountName=cs41003200113807a1f;AccountKey=2Nljt9xH0Ry2YrCbWppi5C/lhx7CWxu6NIzeyQ9mAuLHyzIPG7aiGGrwKmm8GOe5lx0FsMV5MANj+AStdXc2xw==;EndpointSuffix=core.windows.net")
+    //blob_service_client = BlobServiceClient.from_connection_string()
     container_client = blob_service_client.get_container_client("436p4")
 
     # delete everything from azure blob and cosmos db
@@ -121,7 +123,7 @@ def clear():
 @app.route("/queryAll")
 def queryAll():
     # connect to db
-    client = MongoClient("mongodb://li-c-436p4-server:0Thk4cHi5Y0rLkelh4VB0Coxz2hpZY2fot03kUDh12rj6fW8oXMleZhwplJmQRJKQDzIb5F7LEndACDb8hGngw==@li-c-436p4-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@li-c-436p4-server@")
+    //client = MongoClient()
     database = client["436p4DB"]
     dbCollect = database["storedData"]
     results = dbCollect.find({})
@@ -136,7 +138,7 @@ def queryAll():
 @app.route("/query/<string:fName>_<string:lName>")
 def query(fName, lName):
     # connect to db
-    client = MongoClient("mongodb://li-c-436p4-server:0Thk4cHi5Y0rLkelh4VB0Coxz2hpZY2fot03kUDh12rj6fW8oXMleZhwplJmQRJKQDzIb5F7LEndACDb8hGngw==@li-c-436p4-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@li-c-436p4-server@")
+    //client = MongoClient()
     database = client["436p4DB"]
     dbCollect = database["storedData"]
 
@@ -160,7 +162,7 @@ def query(fName, lName):
 @app.route("/queryF/<string:fName>_")
 def queryF(fName):
     # connect to db
-    client = MongoClient("mongodb://li-c-436p4-server:0Thk4cHi5Y0rLkelh4VB0Coxz2hpZY2fot03kUDh12rj6fW8oXMleZhwplJmQRJKQDzIb5F7LEndACDb8hGngw==@li-c-436p4-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@li-c-436p4-server@")
+    //client = MongoClient()
     database = client["436p4DB"]
     dbCollect = database["storedData"]
 
@@ -179,7 +181,7 @@ def queryF(fName):
 @app.route("/queryL/_<string:lName>")
 def queryL(lName):
     # connect to db
-    client = MongoClient("mongodb://li-c-436p4-server:0Thk4cHi5Y0rLkelh4VB0Coxz2hpZY2fot03kUDh12rj6fW8oXMleZhwplJmQRJKQDzIb5F7LEndACDb8hGngw==@li-c-436p4-server.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@li-c-436p4-server@")
+    //client = MongoClient()
     database = client["436p4DB"]
     dbCollect = database["storedData"]
 
